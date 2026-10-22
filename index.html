@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Фёдор Шокоров — резюме">
+<meta property="og:description" content="Студент 3 курса МФТИ (ФЭФМ). SOLIDWORKS, Python, LaTeX, робототехника.">
+<title>Фёдор Шокоров</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Фёдор Шокоров — студент 3 курса МФТИ. SOLIDWORKS, Python, LaTeX, GitHub. Проекты по робототехнике.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one quiet column, soft greys, generous whitespace; rows separated by hairlines that react on hover */
+:root{
+  --bg:#f6f6f5;
+  --surface:#ededec;
+  --fg:#1d1d1c;
+  --muted:#7a7a78;
+  --faint:#b9b9b6;
+  --line:#dededc;
+  --sans:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161616; --surface:#1f1f1f; --fg:#e9e9e7; --muted:#8f8f8c; --faint:#555553; --line:#2a2a29;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161616; --surface:#1f1f1f; --fg:#e9e9e7; --muted:#8f8f8c; --faint:#555553; --line:#2a2a29;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:var(--sans); font-size:16px; line-height:1.65; font-weight:400;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:0;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit; text-decoration:none}
+::selection{background:var(--fg); color:var(--bg)}
+a:focus-visible, button:focus-visible{outline:1.5px solid var(--fg); outline-offset:4px; border-radius:4px}
+
+.wrap{ max-width:760px; margin:0 auto; padding-block:88px 56px; display:grid; gap:96px }
+@media (max-width:640px){ .wrap{ padding-block:48px 40px; gap:72px } }
+
+.label{ font-family:var(--mono); font-size:12px; color:var(--muted); letter-spacing:.04em }
+
+/* Hero */
+.hero{ display:grid; gap:28px }
+.id{ display:flex; align-items:center; gap:22px; flex-wrap:wrap }
+.photo{
+  width:84px; height:84px; border-radius:50%; flex:0 0 auto;
+  background:var(--surface); color:var(--muted);
+  display:grid; place-items:center; font-weight:500; font-size:22px; letter-spacing:.02em;
+  transition:transform .5s var(--ease);
+}
+.photo:hover{ transform:scale(1.04) }
+h1{ font-weight:300; font-size:clamp(40px, 7vw, 64px); line-height:1.02; letter-spacing:-.035em; margin:0 }
+.role{ font-size:clamp(18px,2.4vw,22px); font-weight:400; letter-spacing:-.01em; margin:0; max-width:30ch; text-wrap:balance }
+.lead{ margin:0; color:var(--muted); max-width:58ch }
+
+.cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:4px }
+.btn{
+  position:relative; overflow:hidden; isolation:isolate;
+  display:inline-flex; align-items:center; gap:10px;
+  padding:11px 20px; border-radius:999px; font-size:14.5px; font-weight:500;
+  border:1px solid var(--fg); color:var(--fg); background:transparent;
+  transition:color .35s var(--ease);
+}
+.btn::before{
+  content:""; position:absolute; inset:0; z-index:-1; background:var(--fg);
+  transform:translateY(101%); transition:transform .35s var(--ease);
+}
+.btn:hover{ color:var(--bg) }
+.btn:hover::before{ transform:translateY(0) }
+.btn.solid{ background:var(--fg); color:var(--bg) }
+.btn.solid::before{ background:var(--bg) }
+.btn.solid:hover{ color:var(--fg) }
+.arrow{ display:inline-block; transition:transform .35s var(--ease) }
+.btn:hover .arrow, .row:hover .arrow{ transform:translateX(4px) }
+
+/* Sections */
+section{ display:grid; gap:20px }
+h2{ font-family:var(--mono); font-weight:400; font-size:12px; color:var(--muted); letter-spacing:.04em; margin:0; text-transform:lowercase }
+
+/* Skills */
+.skills{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px }
+@media (max-width:560px){ .skills{ grid-template-columns:1fr } }
+.skill{
+  padding:20px 22px; border-radius:14px; background:var(--surface);
+  display:grid; gap:4px; align-content:start; min-width:0;
+  transition:transform .4s var(--ease), background-color .4s var(--ease);
+}
+.skill:hover{ transform:translateY(-3px) }
+.skill h3{ font-size:16px; font-weight:600; margin:0; letter-spacing:-.01em }
+.skill p{ margin:0; color:var(--muted); font-size:14.5px }
+
+/* Projects as rows */
+.rows{ border-top:1px solid var(--line) }
+.row{
+  display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 24px;
+  padding:26px 0; border-bottom:1px solid var(--line);
+  position:relative;
+}
+.row::after{
+  content:""; position:absolute; left:0; bottom:-1px; height:1px; width:100%;
+  background:var(--fg); transform:scaleX(0); transform-origin:left;
+  transition:transform .6s var(--ease);
+}
+.row:hover::after{ transform:scaleX(1) }
+.row h3{ font-size:20px; font-weight:500; letter-spacing:-.02em; margin:0 0 6px }
+.row p{ margin:0; color:var(--muted); max-width:56ch }
+.row .year{ font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:6px; font-variant-numeric:tabular-nums }
+.row .foot{ grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:8px }
+.tags{ display:flex; gap:14px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; color:var(--muted) }
+.links{ display:flex; gap:18px; flex-wrap:wrap; font-size:14.5px; font-weight:500 }
+.ulink{
+  background-image:linear-gradient(currentColor,currentColor);
+  background-size:0% 1px; background-repeat:no-repeat; background-position:0 100%;
+  transition:background-size .4s var(--ease); padding-bottom:2px;
+}
+.ulink:hover{ background-size:100% 1px }
+.note{ font-family:var(--mono); font-size:12px; color:var(--faint); margin-top:6px }
+
+/* Education + languages */
+.two{ display:grid; grid-template-columns:1fr 1fr; gap:48px }
+@media (max-width:640px){ .two{ grid-template-columns:1fr; gap:40px } }
+.edu{ display:grid; gap:4px }
+.edu b{ font-weight:500; font-size:17px }
+.edu span{ color:var(--muted) }
+.lang{ display:grid; gap:14px }
+.lang-row{ display:grid; grid-template-columns:100px 1fr 44px; align-items:center; gap:14px }
+.bar{ height:3px; border-radius:3px; background:var(--line); overflow:hidden }
+.bar i{ display:block; height:100%; background:var(--fg); border-radius:3px; width:var(--w); transform-origin:left; transition:transform .6s var(--ease) }
+.lang-row:hover .bar i{ transform:scaleX(1.02) }
+.lang-row b{ font-family:var(--mono); font-weight:400; font-size:12.5px; color:var(--muted); text-align:right }
+
+/* Contacts */
+.contacts{ border-top:1px solid var(--line) }
+.c-row{
+  display:grid; grid-template-columns:120px minmax(0,1fr) auto; align-items:center; gap:16px;
+  padding:18px 0; border-bottom:1px solid var(--line);
+  transition:padding .4s var(--ease);
+}
+.c-row:hover{ padding-left:8px }
+@media (max-width:520px){ .c-row{ grid-template-columns:1fr auto } .c-row .label{ grid-column:1 / -1 } }
+.c-val{ font-size:17px; font-weight:500; word-break:break-all }
+.copy{
+  font-family:var(--mono); font-size:12px; color:var(--muted); background:none; border:0; cursor:pointer; padding:4px 0;
+  transition:color .3s var(--ease);
+}
+.copy:hover{ color:var(--fg) }
+
+footer{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap }
+
+/* Gentle load-in from a visible state */
+@keyframes rise{ from{ transform:translateY(8px) } to{ transform:none } }
+.wrap > *{ animation:rise .8s var(--ease) both }
+.wrap > *:nth-child(2){ animation-delay:.05s }
+.wrap > *:nth-child(3){ animation-delay:.1s }
+.wrap > *:nth-child(4){ animation-delay:.15s }
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation:none !important; transition:none !important }
+}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <span class="label">резюме · обновлено в октябре 2026</span>
+    <div class="id">
+      <div class="photo" aria-label="Место для фотографии">ФШ</div>
+      <h1>Фёдор Шокоров</h1>
+    </div>
+    <p class="role">Студент 3 курса МФТИ. 3D-моделирование, Python, робототехника.</p>
+    <p class="lead">Проектирую механические узлы в SOLIDWORKS, пишу на Python расчёты и графики, оформляю работы в LaTeX. В 2025 году в команде из трёх человек собрал гусеничного робота для соревнований FabricBots.</p>
+    <div class="cta">
+      <a class="btn solid" href="https://t.me/slkntg" target="_blank" rel="noopener">Написать в Telegram <span class="arrow">→</span></a>
+      <a class="btn" href="https://github.com/slkn300" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <section aria-labelledby="h-skills">
+    <h2 id="h-skills">навыки</h2>
+    <div class="skills">
+      <div class="skill"><h3>SOLIDWORKS</h3><p>Детали, сборки, чертежи. Модель робота для FabricBots 2025.</p></div>
+      <div class="skill"><h3>Python</h3><p>Алгоритмы, обработка данных, графики.</p></div>
+      <div class="skill"><h3>LaTeX</h3><p>Отчёты и статьи с формулами и рисунками. Обзор по фазе Берри свёрстан в LaTeX.</p></div>
+      <div class="skill"><h3>Git и GitHub</h3><p>Репозитории, командная работа над кодом и CAD-файлами.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-projects">
+    <h2 id="h-projects">проекты и статьи</h2>
+    <div class="rows">
+      <article class="row">
+        <div>
+          <h3>Гусеничный робот с клином</h3>
+          <p>Робот для соревнований FabricBots 2025, команда из трёх человек. CAD-модель, подбор компонентов и управляющая программа на C++.</p>
+        </div>
+        <span class="year">2025</span>
+        <div class="foot">
+          <div class="tags"><span>SOLIDWORKS</span><span>C++</span><span>робототехника</span></div>
+          <div class="links">
+            <a class="ulink" href="https://github.com/slkn300/BOTS-2025" target="_blank" rel="noopener">Репозиторий <span class="arrow">→</span></a>
+            <a class="ulink" href="https://t.me/pcp_gusenichniy_robot" target="_blank" rel="noopener">Канал проекта</a>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <div>
+          <h3>От закона Рытова к геометрической фазе Берри</h3>
+          <p>Обзорная работа по оптике, МФТИ. Разбираю, как плоскость поляризации света поворачивается вдоль искривлённого луча и почему угол поворота равен телесному углу, который описывает направление луча. Это классический аналог фазы Берри. В конце — современные работы об оптическом эффекте Холла.</p>
+        </div>
+        <span class="year">2026</span>
+        <div class="foot">
+          <div class="tags"><span>оптика</span><span>LaTeX</span><span>8 стр.</span><span>7 источников</span></div>
+          <div class="links">
+            <a class="ulink" href="shokorov-rytov-berry.pdf" target="_blank" rel="noopener">Открыть PDF <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-edu">
+    <h2 id="h-edu">образование и языки</h2>
+    <div class="two">
+      <div class="edu">
+        <span class="label">2024 — н. в.</span>
+        <b>МФТИ</b>
+        <span>Физтех-школа электроники, фотоники и молекулярной физики (ФЭФМ)</span>
+        <span>Бакалавриат, 3 курс</span>
+      </div>
+      <div class="lang">
+        <div class="lang-row"><span>Русский</span><div class="bar"><i style="--w:100%"></i></div><b>родной</b></div>
+        <div class="lang-row"><span>Английский</span><div class="bar"><i style="--w:66%"></i></div><b>B2</b></div>
+        <div class="lang-row"><span>Казахский</span><div class="bar"><i style="--w:66%"></i></div><b>B2</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts" aria-labelledby="h-contacts">
+    <h2 id="h-contacts">контакты</h2>
+    <div class="contacts">
+      <div class="c-row">
+        <span class="label">почта</span>
+        <span class="c-val" id="mail">f.shokorov@gmail.com</span>
+        <button class="copy" id="copy-mail" type="button">скопировать</button>
+      </div>
+      <a class="c-row" href="https://t.me/slkntg" target="_blank" rel="noopener">
+        <span class="label">telegram</span>
+        <span class="c-val">@slkntg</span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="c-row" href="https://github.com/slkn300" target="_blank" rel="noopener">
+        <span class="label">github</span>
+        <span class="c-val">slkn300</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="label">вне учёбы — фотография</span>
+    <span class="label">© Фёдор Шокоров</span>
+  </footer>
+
+</main>
+
+<script>
+document.getElementById('copy-mail').addEventListener('click', function(){
+  var btn = this, el = document.getElementById('mail');
+  function done(){ btn.textContent = 'скопировано'; setTimeout(function(){ btn.textContent = 'скопировать'; }, 1600); }
+  function fallback(){
+    var r = document.createRange(); r.selectNodeContents(el);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    btn.textContent = 'выделено, нажмите Ctrl+C';
+  }
+  try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch(e){ fallback(); }
+});
+</script>
+</body>
+</html>
